@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F6F5F2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Rook 技术支持与常见问题：漫画翻译、长条漫画、下载、主题设置和数据清理。">
+  <meta name="robots" content="index,follow">
+  <title>技术支持 · Rook</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f5f2;
+      --surface: #ffffff;
+      --surface-2: #efede8;
+      --ink: #1b1b1b;
+      --ink-soft: #4b4742;
+      --muted: #746f68;
+      --line: #e4e0d8;
+      --accent: #e85d4c;
+      --accent-ink: #b23a2c;
+      --accent-soft: #fdf0ed;
+      --shadow: 0 24px 60px rgba(27, 27, 27, 0.08);
+      --radius: 28px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #101114;
+        --surface: #1a1c22;
+        --surface-2: #262932;
+        --ink: #f3ede4;
+        --ink-soft: #d8d0c5;
+        --muted: #a39b92;
+        --line: #32343c;
+        --accent: #ff7a66;
+        --accent-ink: #ff9a8a;
+        --accent-soft: #2a1b19;
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 520px at 10% -12%, rgba(232, 93, 76, 0.13), transparent 62%),
+        var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: var(--accent); color: #ffffff; }
+
+    a {
+      color: var(--accent-ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover { text-decoration-thickness: 2px; }
+
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -80px;
+      z-index: 10;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .skip-link:focus { top: 16px; }
+
+    .shell {
+      width: min(100% - 40px, 880px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 26px 0 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 20px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: block;
+      box-shadow: 0 6px 18px rgba(232, 93, 76, 0.22);
+    }
+
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+
+    .brand-text small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 78%, transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav a {
+      padding: 7px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .nav a:hover { color: var(--ink); background: var(--surface-2); }
+
+    .nav a[aria-current="page"] {
+      color: var(--ink);
+      background: var(--surface-2);
+    }
+
+    .page {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(26px, 5.5vw, 58px);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5.2vw, 44px);
+      line-height: 1.18;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 2.2vw, 18px);
+      line-height: 1.8;
+      max-width: 62ch;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 42px 0 12px;
+      font-size: 20px;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+    }
+
+    h2 .num {
+      color: var(--accent-ink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    h3 {
+      margin: 24px 0 6px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    p { margin: 10px 0; color: var(--ink-soft); }
+
+    ul, ol { margin: 10px 0; padding-left: 1.25em; color: var(--ink-soft); }
+
+    li { margin: 6px 0; }
+
+    li::marker { color: var(--accent-ink); }
+
+    .ui {
+      display: inline-block;
+      padding: 1px 7px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: var(--surface-2);
+      color: var(--ink);
+      font-size: 0.92em;
+      font-weight: 600;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0 8px;
+    }
+
+    .quick-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface-2);
+    }
+
+    .quick-card .kicker {
+      display: block;
+      color: var(--accent-ink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .quick-card strong { display: block; font-size: 15px; line-height: 1.5; }
+
+    .quick-card p { margin: 4px 0 0; font-size: 13px; line-height: 1.65; color: var(--muted); }
+
+    .steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 8px;
+    }
+
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding-left: 42px;
+      margin: 16px 0;
+      color: var(--ink-soft);
+    }
+
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 1px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .steps strong { color: var(--ink); }
+
+    .faq {
+      margin: 14px 0 8px;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq details {
+      border-bottom: 1px solid var(--line);
+      padding: 16px 0;
+    }
+
+    .faq summary {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      cursor: pointer;
+      list-style: none;
+      color: var(--ink);
+      font-size: 15.5px;
+      font-weight: 650;
+      line-height: 1.6;
+    }
+
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq summary::after {
+      content: "+";
+      flex: none;
+      color: var(--accent-ink);
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+
+    .faq details[open] summary::after { content: "−"; }
+
+    .faq .answer {
+      margin-top: 10px;
+      padding-right: 30px;
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      line-height: 1.85;
+    }
+
+    .faq .answer p { margin: 6px 0; }
+
+    .callout {
+      margin: 22px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface-2);
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .callout strong { color: var(--ink); }
+
+    .compat {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 16px 0 8px;
+    }
+
+    .compat div {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface-2);
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+
+    .compat strong { display: block; color: var(--ink); margin-bottom: 2px; }
+
+    .contact-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 22px 0 8px;
+      padding: 24px;
+      border-radius: 20px;
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .contact-card h3 { margin: 0 0 4px; color: var(--bg); font-size: 17px; }
+
+    .contact-card p { margin: 0; color: color-mix(in srgb, var(--bg) 76%, transparent); font-size: 14px; }
+
+    .contact-card a { color: var(--bg); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .button:hover { text-decoration: none; opacity: 0.9; }
+
+    .contact-card .button { color: var(--ink); }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      padding: 26px 4px 42px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .site-footer a { color: var(--muted); }
+
+    .site-footer a:hover { color: var(--ink); }
+
+    @media (max-width: 720px) {
+      .quick-grid { grid-template-columns: 1fr; }
+      .compat { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 28px, 880px); }
+      .site-header { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .nav { width: 100%; justify-content: space-between; }
+      .nav a { flex: 1; text-align: center; }
+      .page { border-radius: 22px; padding: 24px 20px 30px; }
+      .contact-card { align-items: flex-start; flex-direction: column; }
+      .button { width: 100%; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+      .faq .answer { padding-right: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --ink: #000000;
+        --ink-soft: #222222;
+        --muted: #444444;
+        --line: #cccccc;
+      }
+      body { background: #ffffff; }
+      .site-header, .site-footer, .skip-link { display: none; }
+      .page { box-shadow: none; border: 0; padding: 0; }
+      a { color: #000000; }
+      .contact-card { background: #f2f2f2; color: #000000; border: 1px solid #cccccc; }
+      .contact-card h3, .contact-card p, .contact-card a { color: #000000; }
+      .faq details { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="support.html" aria-label="Rook 技术支持">
+        <svg class="brand-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+          <rect width="1024" height="1024" rx="228" fill="#101114"/>
+          <path d="M312 180 H712 A132 132 0 0 1 844 312 V568 A132 132 0 0 1 712 700 H480 C430 800 350 845 258 874 C292 800 312 748 330 700 H312 A132 132 0 0 1 180 568 V312 A132 132 0 0 1 312 180 Z" fill="#E85D4C"/>
+          <path d="M414 310 V268 H448 V310 H468 V268 H502 V310 H522 V268 H556 V310 H576 V268 H610 V378 H624 V398 H576 V440 C576 500 590 536 602 562 H632 V600 H652 V628 A12 12 0 0 1 640 640 H384 A12 12 0 0 1 372 628 V600 H392 V562 H422 C434 536 448 500 448 440 V398 H400 V378 H414 Z" fill="#F3EDE4"/>
+        </svg>
+        <span class="brand-text">Rook<small>Comic Reader</small></span>
+      </a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="privacy.html">隐私政策</a>
+        <a href="support.html" aria-current="page">技术支持</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page">
+      <p class="eyebrow">Rook · Support</p>
+      <h1>技术支持</h1>
+      <div class="meta">
+        <span><span class="dot"></span>当前版本：1.0.0 (1)</span>
+        <span>最后更新：2026 年 10 月 20 日</span>
+      </div>
+      <p class="lead">遇到问题？先看下面的快速排查和常见问题。如果仍未解决，请通过邮件联系我们，并附上必要的信息。</p>
+
+      <div class="contact-card">
+        <div>
+          <h3>需要人工帮助？</h3>
+          <p>请说明设备型号、iOS 版本、App 版本，以及出问题的网址和操作步骤。</p>
+        </div>
+        <!-- 上线前请把 your-email@example.com 替换为真实支持邮箱 -->
+        <a class="button" href="mailto:your-email@example.com?subject=Rook%20%E6%94%AF%E6%8C%81%E8%AF%B7%E6%B1%82">your-email@example.com</a>
+      </div>
+
+      <h2><span class="num">01</span>先试这三步</h2>
+      <ol class="steps">
+        <li><strong>打开漫画网页。</strong>在首页输入网址，或直接粘贴漫画页面链接。默认会自动补全 <code>https://</code>。</li>
+        <li><strong>打开翻译面板。</strong>页面加载完成后，点底部工具栏的 <span class="ui">扩展</span>（拼图图标），再选 <span class="ui">漫画翻译</span>。</li>
+        <li><strong>选择语言并开始。</strong>选择原文和译文语言，点 <span class="ui">开始翻译</span>。首次使用可能提示下载系统语言包，下载完成后再试。</li>
+      </ol>
+
+      <h2><span class="num">02</span>常见问题</h2>
+      <div class="faq">
+        <details open>
+          <summary>翻译功能需要什么系统版本？</summary>
+          <div class="answer">
+            <p>漫画翻译使用 iOS 的 Translation 框架，需要 <strong>iOS 18 或更高版本</strong>。浏览器、书签、历史、下载和主题功能可在 iOS 16 及以上版本使用。</p>
+            <p>请在真机上使用翻译；iOS 模拟器通常不支持系统翻译服务。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>点了「开始翻译」没有反应或提示失败怎么办？</summary>
+          <div class="answer">
+            <p>按顺序检查：</p>
+            <ul>
+              <li>确认系统版本为 iOS 18+，并使用真机；</li>
+              <li>首次翻译某种语言时，系统可能需要下载语言包，请等待下载完成；</li>
+              <li>确认页面里确实有足够大的漫画图片，且图片已经加载出来；</li>
+              <li>页面加载完成后重新打开「漫画翻译」面板再试；</li>
+              <li>换一个页面或网站，确认不是该网站的限制；</li>
+              <li>如果仍然失败，请把网址、截图和错误提示发给我们。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>为什么译文位置不准确，或者有漏字？</summary>
+          <div class="answer">
+            <p>译文位置由文字识别和排版结果决定。以下情况可能影响效果：</p>
+            <ul>
+              <li>文字很小、模糊、倾斜或被压缩；</li>
+              <li>手写体、艺术字、描边字或特殊字体；</li>
+              <li>文字与背景对比度低，或文字压在复杂纹理上；</li>
+              <li>页面使用 Canvas 绘制，或图片被分片加载。</li>
+            </ul>
+            <p>可以尝试打开更高分辨率的页面、放大图片、等图片完全加载后再翻译，或换一个页面。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>长条下拉漫画怎么翻译？</summary>
+          <div class="answer">
+            <p>在「漫画翻译」面板中打开 <span class="ui">先向下滚动，加载更多图片</span>。App 会先向下滚动以加载更多图片，然后回到原来的阅读位置并开始翻译。</p>
+            <p>如果章节很长，建议先手动滚动到目标区域，等图片出现后再打开翻译面板。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>为什么有些网页找不到漫画图片，或无法翻译？</summary>
+          <div class="answer">
+            <p>Rook 会查找页面中尺寸较大的图片。以下页面可能无法处理：</p>
+            <ul>
+              <li>用 Canvas 或 WebGL 绘制、没有独立图片地址的页面；</li>
+              <li>需要登录、付费或验证码才能显示图片的页面；</li>
+              <li>图片由脚本动态加载，或使用了跨域限制；</li>
+              <li>网站明确禁止第三方浏览器或 WebView 访问。</li>
+            </ul>
+            <p>这类情况通常需要网站本身提供可访问的图片地址，App 端无法绕过网站的限制。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>网页打不开、一直空白或提示加载失败？</summary>
+          <div class="answer">
+            <p>先确认网络连接正常，并在 Safari 中打开同一个网址：</p>
+            <ul>
+              <li>如果 Safari 也打不开，可能是网站暂时不可用或屏蔽了你的网络；</li>
+              <li>如果 Safari 能打开而 Rook 不能，请检查网址是否完整（包含 <code>http://</code> 或 <code>https://</code>）；</li>
+              <li>有些网站会限制 WebView 或非 Safari 浏览器，这类情况 App 无法强制绕过；</li>
+              <li>可以尝试刷新页面、重新打开标签页，或换一个网络。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>下载的文件在哪里？怎么分享或删除？</summary>
+          <div class="answer">
+            <p>下载的网页和图片保存在 App 的文档目录中，不会自动上传到云端。打开底部工具栏的 <span class="ui">下载内容</span> 可以查看、打开、分享或删除。</p>
+            <p>也可以在 <span class="ui">设置</span> → <span class="ui">数据</span> 中清空全部下载内容。卸载 App 会删除这些文件。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>如何切换主题、搜索引擎和默认翻译语言？</summary>
+          <div class="answer">
+            <p>打开首页右上角的 <span class="ui">设置</span>：</p>
+            <ul>
+              <li><strong>默认搜索引擎：</strong>切换谷歌、必应或百度；首页搜索框左侧也会按同一顺序切换。</li>
+              <li><strong>外观：</strong>选择夜色、简白或护眼。</li>
+              <li><strong>漫画翻译：</strong>设置默认原文语言、默认译文语言，以及是否默认先向下滚动加载图片。</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>如何清空浏览记录和下载内容？</summary>
+          <div class="answer">
+            <p>进入 <span class="ui">设置</span> → <span class="ui">数据</span>，分别点 <span class="ui">清空浏览记录</span> 或 <span class="ui">清空下载内容</span>。清空下载内容会删除列表和已保存的文件。</p>
+            <p>卸载 App 会删除全部本地数据，包括书签、历史、下载和设置。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>App 会收集我的数据吗？</summary>
+          <div class="answer">
+            <p>不会。Rook 不收集个人数据，不需要账号，App 本身不含广告、分析或社交 SDK。浏览记录、书签、下载和设置只保存在本机。详情请查看 <a href="privacy.html">隐私政策</a>。</p>
+            <p>你访问的第三方网站可能按照自己的隐私政策收集信息，例如 Cookie、访问日志或广告数据。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>支持 iPad 吗？</summary>
+          <div class="answer">
+            <p>支持。Rook 可以运行在 iPhone 和 iPad 上，并支持横屏和竖屏。iPad 上的布局会随窗口尺寸调整。</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>如何报告问题或提出建议？</summary>
+          <div class="answer">
+            <p>请发邮件到上方支持邮箱，并尽量附上：</p>
+            <ul>
+              <li>设备型号（例如 iPhone 16 Pro、iPad Pro 13 英寸）；</li>
+              <li>iOS 版本和 Rook 版本（设置页或 App Store 页面可查看）；</li>
+              <li>出问题的网址；</li>
+              <li>操作步骤、截图或录屏；</li>
+              <li>是否使用了系统翻译语言包、是否是首次使用。</li>
+            </ul>
+            <p>请不要发送密码、身份证号、支付信息等敏感内容。</p>
+          </div>
+        </details>
+      </div>
+
+      <h2><span class="num">03</span>兼容性</h2>
+      <div class="compat">
+        <div><strong>设备</strong>iPhone、iPad；支持横屏和竖屏。</div>
+        <div><strong>浏览器功能</strong>iOS 16 及以上。</div>
+        <div><strong>漫画翻译</strong>iOS 18 及以上；建议使用真机。</div>
+        <div><strong>网络</strong>需要网络连接；部分网站可能需要登录或付费。</div>
+      </div>
+
+      <h2><span class="num">04</span>版权与第三方内容</h2>
+      <p>Rook 是一个浏览器，不托管、不分发漫画内容。你访问的网页、图片和文字由相应网站提供，版权归其权利人所有。请在你拥有访问权限的网站上使用本 App。</p>
+      <p>如果你认为某个网站的内容侵犯了你的权利，请联系该网站运营方；你也可以告知我们，我们会在合理范围内协助转达。Rook 不托管、不分发漫画内容；你主动下载的网页或图片只保存在本机，不会由我们上传或转载。</p>
+
+      <h2><span class="num">05</span>联系我们</h2>
+      <p>如果上面的内容没有解决你的问题，请通过邮件联系技术支持：</p>
+      <div class="contact-card">
+        <div>
+          <h3>Rook 技术支持</h3>
+          <p>我们会尽快查看并回复。附上截图或录屏能帮助我们更快定位问题。</p>
+        </div>
+        <!-- 上线前请把 your-email@example.com 替换为真实支持邮箱 -->
+        <a class="button" href="mailto:your-email@example.com?subject=Rook%20%E6%94%AF%E6%8C%81%E8%AF%B7%E6%B1%82">your-email@example.com</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Rook. 保留所有权利。</span>
+      <span><a href="support.html">技术支持</a> · <a href="privacy.html">隐私政策</a> · Rook 与 Apple Inc. 无关联。</span>
+    </footer>
+  </div>
+</body>
+</html>

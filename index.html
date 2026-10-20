@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F6F5F2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#101114" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Rook 隐私政策：Rook 不收集个人数据，浏览记录、书签、下载和设置只保存在本机。">
+  <meta name="robots" content="index,follow">
+  <title>隐私政策 · Rook</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f5f2;
+      --surface: #ffffff;
+      --surface-2: #efede8;
+      --ink: #1b1b1b;
+      --ink-soft: #4b4742;
+      --muted: #746f68;
+      --line: #e4e0d8;
+      --accent: #e85d4c;
+      --accent-ink: #b23a2c;
+      --accent-soft: #fdf0ed;
+      --shadow: 0 24px 60px rgba(27, 27, 27, 0.08);
+      --radius: 28px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #101114;
+        --surface: #1a1c22;
+        --surface-2: #262932;
+        --ink: #f3ede4;
+        --ink-soft: #d8d0c5;
+        --muted: #a39b92;
+        --line: #32343c;
+        --accent: #ff7a66;
+        --accent-ink: #ff9a8a;
+        --accent-soft: #2a1b19;
+        --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 520px at 10% -12%, rgba(232, 93, 76, 0.13), transparent 62%),
+        var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: var(--accent); color: #ffffff; }
+
+    a {
+      color: var(--accent-ink);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover { text-decoration-thickness: 2px; }
+
+    a:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -80px;
+      z-index: 10;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .skip-link:focus { top: 16px; }
+
+    .shell {
+      width: min(100% - 40px, 880px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 26px 0 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-size: 20px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: block;
+      box-shadow: 0 6px 18px rgba(232, 93, 76, 0.22);
+    }
+
+    .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+
+    .brand-text small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--surface) 78%, transparent);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav a {
+      padding: 7px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .nav a:hover { color: var(--ink); background: var(--surface-2); }
+
+    .nav a[aria-current="page"] {
+      color: var(--ink);
+      background: var(--surface-2);
+    }
+
+    .page {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(26px, 5.5vw, 58px);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent-ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5.2vw, 44px);
+      line-height: 1.18;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 16px 0 0;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 2.2vw, 18px);
+      line-height: 1.8;
+      max-width: 62ch;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .meta span { display: inline-flex; align-items: center; gap: 6px; }
+
+    .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    .summary {
+      margin: 30px 0 8px;
+      padding: 18px 20px;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 16px 16px 0;
+      background: var(--accent-soft);
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .summary strong { color: var(--ink); }
+
+    h2 {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 42px 0 10px;
+      font-size: 20px;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+    }
+
+    h2 .num {
+      color: var(--accent-ink);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    h3 {
+      margin: 24px 0 6px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    p { margin: 10px 0; color: var(--ink-soft); }
+
+    ul, ol { margin: 10px 0; padding-left: 1.25em; color: var(--ink-soft); }
+
+    li { margin: 6px 0; }
+
+    li::marker { color: var(--accent-ink); }
+
+    .callout {
+      margin: 22px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface-2);
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .callout strong { color: var(--ink); }
+
+    .contact-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 30px 0 8px;
+      padding: 24px;
+      border-radius: 20px;
+      background: var(--ink);
+      color: var(--bg);
+    }
+
+    .contact-card h3 { margin: 0 0 4px; color: var(--bg); font-size: 17px; }
+
+    .contact-card p { margin: 0; color: color-mix(in srgb, var(--bg) 76%, transparent); font-size: 14px; }
+
+    .contact-card a { color: var(--bg); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .button:hover { text-decoration: none; opacity: 0.9; }
+
+    .contact-card .button { color: var(--ink); }
+
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      padding: 26px 4px 42px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .site-footer a { color: var(--muted); }
+
+    .site-footer a:hover { color: var(--ink); }
+
+    .placeholder {
+      padding: 1px 5px;
+      border-radius: 5px;
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 28px, 880px); }
+      .site-header { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .nav { width: 100%; justify-content: space-between; }
+      .nav a { flex: 1; text-align: center; }
+      .page { border-radius: 22px; padding: 24px 20px 30px; }
+      .contact-card { align-items: flex-start; flex-direction: column; }
+      .button { width: 100%; }
+      .site-footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+
+    @media print {
+      :root {
+        --bg: #ffffff;
+        --surface: #ffffff;
+        --ink: #000000;
+        --ink-soft: #222222;
+        --muted: #444444;
+        --line: #cccccc;
+      }
+      body { background: #ffffff; }
+      .site-header, .site-footer, .skip-link { display: none; }
+      .page { box-shadow: none; border: 0; padding: 0; }
+      a { color: #000000; }
+      .contact-card { background: #f2f2f2; color: #000000; border: 1px solid #cccccc; }
+      .contact-card h3, .contact-card p, .contact-card a { color: #000000; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="support.html" aria-label="Rook 技术支持">
+        <svg class="brand-icon" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+          <rect width="1024" height="1024" rx="228" fill="#101114"/>
+          <path d="M312 180 H712 A132 132 0 0 1 844 312 V568 A132 132 0 0 1 712 700 H480 C430 800 350 845 258 874 C292 800 312 748 330 700 H312 A132 132 0 0 1 180 568 V312 A132 132 0 0 1 312 180 Z" fill="#E85D4C"/>
+          <path d="M414 310 V268 H448 V310 H468 V268 H502 V310 H522 V268 H556 V310 H576 V268 H610 V378 H624 V398 H576 V440 C576 500 590 536 602 562 H632 V600 H652 V628 A12 12 0 0 1 640 640 H384 A12 12 0 0 1 372 628 V600 H392 V562 H422 C434 536 448 500 448 440 V398 H400 V378 H414 Z" fill="#F3EDE4"/>
+        </svg>
+        <span class="brand-text">Rook<small>Comic Reader</small></span>
+      </a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="privacy.html" aria-current="page">隐私政策</a>
+        <a href="support.html">技术支持</a>
+      </nav>
+    </header>
+
+    <main id="main" class="page">
+      <p class="eyebrow">Rook · Privacy</p>
+      <h1>隐私政策</h1>
+      <div class="meta">
+        <span><span class="dot"></span>最后更新：2026 年 10 月 20 日</span>
+        <span>生效日期：2026 年 10 月 20 日</span>
+      </div>
+      <p class="lead">Rook 是一个网页漫画浏览与翻译工具。本政策说明 Rook 如何处理你在使用 App 时产生的信息。</p>
+
+      <div class="summary">
+        <strong>简而言之：</strong>Rook 不收集你的个人数据。浏览记录、书签、下载和设置只保存在你的设备上，不会上传到我们的服务器。
+      </div>
+
+      <h2><span class="num">01</span>适用范围</h2>
+      <p>本政策适用于 iOS 版 Rook（以下简称“本 App”）。它不适用于你通过本 App 访问的第三方网站，也不适用于 Apple 提供的系统服务。第三方网站和 Apple 的服务分别受其自己的隐私政策约束。</p>
+
+      <h2><span class="num">02</span>我们收集的信息</h2>
+      <p>本 App 不需要注册账号，也不收集、出售或共享你的个人数据。具体来说：</p>
+      <ul>
+        <li>不收集姓名、邮箱、电话号码、地址等身份信息；</li>
+        <li>不收集设备标识符、广告标识符或位置信息；</li>
+        <li>App 本身不包含第三方广告、分析、统计或社交 SDK；你访问的网站可能显示广告；</li>
+        <li>不将你的浏览内容上传到开发者服务器。</li>
+      </ul>
+
+      <h2><span class="num">03</span>本机保存的数据</h2>
+      <p>为了让你继续上次的阅读，本 App 会在设备本地保存以下数据：</p>
+      <ul>
+        <li>浏览记录、书签和最近打开的页面；</li>
+        <li>下载记录、下载的网页或图片文件；</li>
+        <li>搜索历史、默认搜索引擎、主题、翻译语言等设置；</li>
+        <li>网页在 WebView 中产生的 Cookie 和本地存储。</li>
+      </ul>
+      <p>这些数据保存在 App 的沙盒、偏好设置或文档目录中。我们无法读取它们，也不会将它们上传。你可以在“设置 → 数据”中清空浏览记录和下载内容；卸载 App 会删除这些本地数据。</p>
+
+      <h2><span class="num">04</span>网络访问与第三方网站</h2>
+      <p>Rook 是一个浏览器。你输入的网址以及网页中的图片、脚本和样式由相应网站提供。这些网站可能按照自己的隐私政策收集信息，例如 Cookie、访问日志、设备信息或用于广告的数据。Rook 不控制、不托管这些网站，也无法替它们决定数据处理方式。</p>
+      <p>为了下载页面中的图片，本 App 可能会在设备上读取当前网站的 Cookie，并只把匹配的 Cookie 随图片请求发送给同一网站；这些 Cookie 不会发送给开发者或无关的第三方。你访问的网站如果使用 HTTP 明文传输，相关流量不会被加密，请留意浏览器地址栏中的协议。</p>
+      <p>建议你在访问不熟悉的网站前查看该网站的隐私政策。你在第三方网站上的账号、密码和支付信息不由 Rook 管理。</p>
+
+      <h2><span class="num">05</span>系统识别与翻译</h2>
+      <p>漫画翻译使用 iOS 系统提供的能力：文字识别由 Apple Vision 框架在设备上完成；翻译由 iOS 的 Translation 框架提供，识别出的文字会交给该系统服务处理。首次使用某种语言时，系统可能要求下载语言包。相关处理受 <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple 隐私政策</a>约束。</p>
+      <div class="callout">
+        <strong>版本提示：</strong>翻译功能需要 iOS 18 或更高版本。浏览器、书签和下载功能可在 iOS 16 及以上版本使用。
+      </div>
+
+      <h2><span class="num">06</span>数据共享与出售</h2>
+      <p>我们不会出售、出租或交易你的个人数据。由于本 App 不收集个人数据，通常也没有可供出售或共享的数据。除非法律要求，我们不会主动披露用户数据。</p>
+
+      <h2><span class="num">07</span>数据安全</h2>
+      <p>本 App 的数据保存在 iOS 应用沙盒中，并受系统文件保护；如果设备启用了锁屏密码，还会受设备锁保护。请不要在不可信的网站上输入敏感信息；浏览器和网络传输不存在绝对安全的环境。如果你怀疑设备上的数据被他人访问，建议删除相关下载和浏览记录，并检查设备锁屏与系统更新。</p>
+
+      <h2><span class="num">08</span>你的选择与权利</h2>
+      <ul>
+        <li><strong>删除本地数据：</strong>在“设置 → 数据”中清空浏览记录和下载内容；卸载 App 会删除全部本地数据。</li>
+        <li><strong>管理网站数据：</strong>网页 Cookie 和本地存储由 WebView 保存在 App 内；如需彻底清除，可在“设置 → 数据”中清空记录，或卸载并重新安装 App。</li>
+        <li><strong>联系我们：</strong>如果你对隐私有疑问，或你所在地区赋予你访问、更正、删除数据的权利，请通过下方邮箱联系我们。由于我们不收集账号数据，通常无法按账号检索信息，但我们会尽力协助。</li>
+      </ul>
+
+      <h2><span class="num">09</span>儿童隐私</h2>
+      <p>本 App 不是专门面向儿童设计的产品。由于本 App 可以访问任意网站，内容不受我们控制，可能包含成人内容；建议 17 岁以上用户使用。我们不会有意收集儿童的个人信息；如果你认为儿童向我们提供了信息，请联系我们。</p>
+
+      <h2><span class="num">10</span>政策更新</h2>
+      <p>我们可能会更新本政策，以反映功能、法律或运营变化。更新后的政策会发布在本页面，并更新顶部的“最后更新”日期。继续使用本 App 即表示你接受更新后的政策。</p>
+
+      <h2><span class="num">11</span>联系我们</h2>
+      <p>如对本隐私政策有任何问题，请联系：</p>
+      <div class="contact-card">
+        <div>
+          <h3>Rook 隐私联系</h3>
+          <p>请尽量说明你的设备型号、iOS 版本和 App 版本。</p>
+        </div>
+        <!-- 上线前请把 your-email@example.com 替换为真实支持邮箱 -->
+        <a class="button" href="mailto:your-email@example.com?subject=Rook%20%E9%9A%90%E7%A7%81%E9%97%AE%E9%A2%98">your-email@example.com</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Rook. 保留所有权利。</span>
+      <span><a href="support.html">技术支持</a> · <a href="privacy.html">隐私政策</a> · Rook 与 Apple Inc. 无关联。</span>
+    </footer>
+  </div>
+</body>
+</html>
